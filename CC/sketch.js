@@ -1,6 +1,7 @@
 let x = 300;
 let y = 200;
-let speed = 3;
+let speedX = 3;
+let speedY = 3;
 
 function setup() {
   createCanvas(600, 400);
@@ -12,13 +13,20 @@ function draw() {
 
   ellipse(x, y, 50);
 
-  if(x > 600) {
-    speed = speed * -1;
+  if(x > width) {
+    speedX = speedX * -1;
   } else if(x < 0) {
-    speed = speed * -1;
+    speedX = speedX * -1;
   }
 
-  x += speed;
+  if(y > height) {
+    speedY = speedY * -1;
+  } else if(y < 0) {
+    speedY = speedY * -1;
+  }
+
+  x += speedX;
+  y += speedY;
 }
 
 function mousePressed() {
