@@ -4,7 +4,7 @@ function setup() {
 
   angleMode(DEGREES);
 
-  rectMode(CENTER);
+  //rectMode(CENTER);
 
   // pixelDensity(3); // Auflösung
 }
@@ -59,21 +59,35 @@ let y = 50;
 function draw() {
   background("lightgrey");
 
-  let n = 20;
-  let border = 50;
+  let s = second();
+  let rSecond = map(s, 0, 60, 0, 360);
 
-  for(i=0; i<=n; i++) {
-    for(j=0; j<=n; j++) {
-      x = map(i, 0, n, border, width-border);
-      y = map(j, 0, n, border, height-border);
+  let m = minute();
+  let rMinute = map(m, 0, 60, 0, 360);
 
-      let d = dist(x, y, mouseX, mouseY);
-      let bgcolor = map(d, 0, width, 0, 255);
+  let h = hour();
+  let rHour = map(h, 0, 12, 0, 360);
 
-      fill(bgcolor);
-      ellipse(x,y,width/n,height/n);
-    }
-  }
+  push();
+  strokeWeight(2);
+  translate(width/2,height/2);
+  rotate(rSecond);
+  line(0, 0, 0, -height/2);
+  pop();
+  
+  push();
+  strokeWeight(4);
+  translate(width/2,height/2);
+  rotate(rMinute);
+  line(0, 0, 0, -height/2);
+  pop();
+
+  push();
+  strokeWeight(8);
+  translate(width/2,height/2);
+  rotate(rHour);
+  line(0, 0, 0, -height/2);
+  pop();
 }
 
 // function draw() {
