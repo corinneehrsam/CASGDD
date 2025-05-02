@@ -60,10 +60,14 @@ function draw() {
   background("lightgrey");
 
   let n = 5;
+  let border = 50;
 
   for(i=0; i<=n; i++) {
-    x = map(i, 0, n, 0, width);
-    ellipse(x,y,50,50);
+    for(j=0; j<=n; j++) {
+      x = map(i, 0, n, border, width-border);
+      y = map(j, 0, n, border, height-border);
+      ellipse(x,y,50,50);
+    }
   }
 }
 
