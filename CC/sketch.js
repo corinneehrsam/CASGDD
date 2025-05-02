@@ -59,14 +59,19 @@ let y = 50;
 function draw() {
   background("lightgrey");
 
-  let n = 5;
+  let n = 20;
   let border = 50;
 
   for(i=0; i<=n; i++) {
     for(j=0; j<=n; j++) {
       x = map(i, 0, n, border, width-border);
       y = map(j, 0, n, border, height-border);
-      ellipse(x,y,50,50);
+
+      let d = dist(x, y, mouseX, mouseY);
+      let bgcolor = map(d, 0, width, 0, 255);
+
+      fill(bgcolor);
+      ellipse(x,y,width/n,height/n);
     }
   }
 }
