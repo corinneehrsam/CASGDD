@@ -1,44 +1,45 @@
+let img1;
+let img2;
+let img3;
+let img4;
+let img5;
+
+let images;
+
+let nrHouses = 20;
+
+function preload() {
+  img1 = loadImage("house1.png");
+  img2 = loadImage("house2.png");
+  img3 = loadImage("house3.png");
+  img4 = loadImage("house4.png");
+  img5 = loadImage("house5.png");
+}
+
 function setup() {
   createCanvas(800, 500);
-  //noLoop();
+  noLoop();
   //pixelDensity(3); 
+  images = [img1, img2, img3, img4, img5];
 }
 
-let b = 0;
-let A = 10;
-let k = 0.05;
-
-let b2 = 0;
-let A2 = 15;
-let k2 = 0.1;
 
 function draw() {
-  background("black");
+  background("250");
 
-  let numRows = 50;      
-  let spacing = 10; 
+  let x = 50;
 
-  for (let row = 0; row < numRows; row++) {
-    let yOffset = row * spacing + 50;  
-    for (let x = 0; x <= width; x += 10) {
-      let y1 = wave(x, A, k, b);
-      let y2 = wave(x, A2, k2, b2);
-      let y = 50 + y1 + y2 + yOffset;
-
-      let alpha = map(y, 0, width, 255, 0);
-      fill(255, alpha);
-      noStroke();
-      ellipse(x, y, 5);
-    }
+  for(let i = 0; i < nrHouses; i++) {
+    let index = floor(random(0,images.length));
+    let img = images[index];
+    let h = 120;
+    let w = (img.width / img.height) * h;
+    image(img, x, 100, w, h);
+    x = x + w;
   }
-
-  b += 0.08;
-  b2 += 0.05;
 }
 
-function wave(x, A, k, b) {
-  return A * sin(k * x + b);
-}
+
 
 function keyTyped() {
   if (key === "s") {
