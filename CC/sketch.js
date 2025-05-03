@@ -1,45 +1,37 @@
-let img1;
-let img2;
-let img3;
-let img4;
-let img5;
-
-let images;
-
-let nrHouses = 20;
-
-function preload() {
-  img1 = loadImage("house1.png");
-  img2 = loadImage("house2.png");
-  img3 = loadImage("house3.png");
-  img4 = loadImage("house4.png");
-  img5 = loadImage("house5.png");
-}
-
 function setup() {
   createCanvas(800, 500);
-  noLoop();
-  //pixelDensity(3); 
-  images = [img1, img2, img3, img4, img5];
+  //noLoop();
+  //pixelDensity(3);
+  rectMode(CENTER);
 }
 
+let rectSize = 150;
+let angle = 0;
+let speed = 3;
 
 function draw() {
-  background("250");
+  background("black");
 
-  let x = 50;
+  fill("white");
+  rect(width/2, height/2, 150, 150);
 
-  for(let i = 0; i < nrHouses; i++) {
-    let index = floor(random(0,images.length));
-    let img = images[index];
-    let h = 120;
-    let w = (img.width / img.height) * h;
-    image(img, x, 100, w, h);
-    x = x + w;
-  }
+  let movement = map(sin(angle), -1, 1, 0, rectSize);
+  let movement2 = map(sin(angle * speed), -1, 1, 0, rectSize);
+
+  fill("yellow");
+  ellipse(width/2 + movement2 - rectSize/2, height/2-rectSize, 50);
+
+  fill("blue");
+  ellipse(width/2 + rectSize, height/2 + movement - rectSize/2, 50);
+
+  fill("yellow");
+  ellipse(width/2 - movement2 + rectSize/2, height/2 + rectSize, 50);
+
+  fill("blue");
+  ellipse(width/2 - rectSize, height/2 - movement + rectSize/2, 50);
+  
+  angle = angle + 0.05;
 }
-
-
 
 function keyTyped() {
   if (key === "s") {
