@@ -1,36 +1,39 @@
 function setup() {
-  createCanvas(800, 500);
-  //noLoop();
-  //pixelDensity(3);
+  createCanvas(800, 800);
   rectMode(CENTER);
+  angleMode(DEGREES);
 }
 
 let rectSize = 150;
 let angle = 0;
-let speed = 3;
 
 function draw() {
   background("black");
+  let movement = map(sin(angle), -1, 1, -20, 20);
 
-  fill("white");
-  rect(width/2, height/2, 150, 150);
+  let x = 0; 
 
-  let movement = map(sin(angle), -1, 1, 0, rectSize);
-  let movement2 = map(sin(angle * speed), -1, 1, 0, rectSize);
+  push();
+  translate(width / 2, height / 2);
+  for (let j = 0; j <= 5; j++) {
+    rotate(30);
+    for (let i = 1; i <= 20; i+=1) {
+      stroke("white");
+      noFill();
+      rotate(i);
+      beginShape();
+      curveVertex(0, 0);
+      curveVertex(0, 0);
+      curveVertex(100, -50 + movement);
+      curveVertex(200, movement);
+      curveVertex(300, -50 + movement / 2);
+      curveVertex(300, -50 + movement / 2);
+      endShape();
+    }
+  }
+  pop();
 
-  fill("yellow");
-  ellipse(width/2 + movement2 - rectSize/2, height/2-rectSize, 50);
-
-  fill("blue");
-  ellipse(width/2 + rectSize, height/2 + movement - rectSize/2, 50);
-
-  fill("yellow");
-  ellipse(width/2 - movement2 + rectSize/2, height/2 + rectSize, 50);
-
-  fill("blue");
-  ellipse(width/2 - rectSize, height/2 - movement + rectSize/2, 50);
-  
-  angle = angle + 0.05;
+  angle += 3;
 }
 
 function keyTyped() {
