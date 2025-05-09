@@ -1,39 +1,41 @@
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(500, 500);
   rectMode(CENTER);
   angleMode(DEGREES);
 }
 
 let rectSize = 150;
 let angle = 0;
+let movement = 0;
+let flip = 1;
 
 function draw() {
   background("black");
-  let movement = map(sin(angle), -1, 1, -20, 20);
+  
+  let x = 0;
+  let y = 0;
+  let j = -1;
+  let gutter = width / 15;
 
-  let x = 0; 
+  stroke("white");
+  noFill();
 
-  push();
-  translate(width / 2, height / 2);
-  for (let j = 0; j <= 5; j++) {
-    rotate(30);
-    for (let i = 1; i <= 20; i+=1) {
-      stroke("white");
-      noFill();
-      rotate(i);
-      beginShape();
-      curveVertex(0, 0);
-      curveVertex(0, 0);
-      curveVertex(100, -50 + movement);
-      curveVertex(200, movement);
-      curveVertex(300, -50 + movement / 2);
-      curveVertex(300, -50 + movement / 2);
-      endShape();
-    }
+  for(let i = 0; i < gutter; i++) {
+    x = x + 15;
+    //line(x,y,x, y+height);
+    movement = map(sin(angle + i * 10), -1, 1, 0, 10); 
+
+    beginShape();
+    curveVertex(x,y);
+    curveVertex(x,y);
+    curveVertex(x + flip * movement, y+height/4);
+    curveVertex(x - flip * movement, y+height/2);
+    curveVertex(x + flip * movement, y+height/4*3);
+    curveVertex(x, y+height);
+    curveVertex(x, y+height);
+    endShape();
+    angle = angle + 0.1;
   }
-  pop();
-
-  angle += 3;
 }
 
 function keyTyped() {
